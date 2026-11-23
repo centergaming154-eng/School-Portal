@@ -1,0 +1,587 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campus Connect | Student Announcement Portal</title>
+<link rel="stylesheet" href="4style.css">
+</head>
+<body>
+
+<!-- LOGIN -->
+<section id="loginPage" class="login-screen">
+  <div class="login-box">
+    <div class="cap-logo">🎓</div>
+    <h1>CAMPUS CONNECT</h1>
+    <p class="login-subtitle">STUDENT ANNOUNCEMENT PORTAL</p>
+
+    <div class="login-heading">
+      <h2>Welcome Back!</h2>
+      <p>Sign in to access your campus updates.</p>
+    </div>
+
+    <form id="loginForm">
+      <label for="username">Username</label>
+      <input id="username" type="text"
+             placeholder="Enter your username" required>
+
+      <label for="password">Password</label>
+      <div class="password-field">
+        <input id="password" type="password"
+               placeholder="Enter your password" required>
+        <button type="button" id="showPassword">Show</button>
+      </div>
+
+      <p id="loginError" class="error"></p>
+      <button class="primary-button" type="submit">LOG IN</button>
+    </form>
+
+    <p class="login-bottom">
+      Stay Informed. Stay Connected.
+    </p>
+  </div>
+</section>
+
+
+<!-- PORTAL -->
+<div id="portal" class="hidden">
+
+  <!-- TOP HEADER -->
+  <header class="topbar">
+    <button class="menu-button" id="menuButton">☰</button>
+
+    <div class="brand">
+      <div class="brand-logo">🎓</div>
+      <div>
+        <h2>CAMPUS CONNECT</h2>
+        <p>STUDENT ANNOUNCEMENT PORTAL</p>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <span class="online-status">● Online</span>
+      <button class="icon-button" id="notificationButton"
+              title="Notifications">♧</button>
+      <button class="icon-button" id="themeButton"
+              title="Change theme">☾</button>
+      <button class="logout-button" id="logoutButton">Log Out</button>
+    </div>
+  </header>
+
+
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+
+      <div class="sidebar-label">MAIN MENU</div>
+
+      <button class="nav-item active" data-page="dashboard">
+        <span>▦</span> Dashboard
+      </button>
+
+      <button class="nav-item" data-page="announcements">
+        <span>⚑</span> Announcements
+      </button>
+
+      <button class="nav-item" data-page="calendar">
+        <span>▦</span> Calendar
+      </button>
+
+      <button class="nav-item" data-page="notifications">
+        <span>♧</span> Notifications
+      </button>
+
+      <button class="nav-item" data-page="academic">
+        <span>📚</span> Academic
+      </button>
+
+      <div class="sidebar-label">PERSONAL</div>
+
+      <button class="nav-item" data-page="profile">
+        <span>♙</span> Student Profile
+      </button>
+
+      <button class="nav-item" data-page="settings">
+        <span>⚙</span> Settings
+      </button>
+
+      <div class="sidebar-label">ADMINISTRATION</div>
+
+      <button class="nav-item" data-page="admin">
+        <span>🛡</span> Admin Mode
+      </button>
+
+      <div class="sidebar-bottom">
+        <div class="mini-cap">🎓</div>
+        <p>Campus Connect</p>
+        <small>Student Portal · 2026</small>
+      </div>
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+      <!-- DASHBOARD -->
+      <section class="page active" id="dashboard">
+
+        <div class="hero">
+          <div class="hero-top">
+            <div>
+              <p>WELCOME BACK!</p>
+              <h1>Your Campus,<br>One Click Away.</h1>
+              <p class="hero-description">
+                Everything important, all in one place.
+              </p>
+            </div>
+            <div class="hero-cap">🎓</div>
+          </div>
+
+          <div class="search-box">
+            <span>⌕</span>
+            <input id="dashboardSearch"
+                   type="search"
+                   placeholder="Search announcements...">
+          </div>
+        </div>
+
+        <div class="section-heading dashboard-heading">
+          <h2>Dashboard</h2>
+          <span class="live-badge">● Live updates</span>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <span class="stat-icon">⚑</span>
+            <h2>12</h2>
+            <p>Announcements</p>
+          </div>
+
+          <div class="stat-box">
+            <span class="stat-icon">▦</span>
+            <h2>03</h2>
+            <p>Upcoming Events</p>
+          </div>
+        </div>
+
+        <div class="content-card">
+          <h2>Recent Updates</h2>
+          <div id="recentUpdates"></div>
+        </div>
+
+        <div class="section-heading">
+          <h2>Latest Announcements</h2>
+          <button class="text-button" data-goto="announcements">
+            View All →
+          </button>
+        </div>
+
+        <div id="dashboardAnnouncements"
+             class="announcement-list"></div>
+
+      </section>
+
+
+      <!-- ANNOUNCEMENTS -->
+      <section class="page" id="announcements">
+        <div class="page-heading">
+          <p>STAY INFORMED</p>
+          <h1>Announcements</h1>
+          <span>All official school updates in one place.</span>
+        </div>
+
+        <input id="announcementSearch" class="page-search"
+               type="search"
+               placeholder="Search announcements...">
+
+        <div id="allAnnouncements"
+             class="announcement-list"></div>
+      </section>
+
+
+      <!-- CALENDAR -->
+      <section class="page" id="calendar">
+        <div class="page-heading">
+          <p>PLAN AHEAD</p>
+          <h1>School Calendar</h1>
+          <span>School events and schedules.</span>
+        </div>
+
+        <div class="content-card">
+          <h2>Upcoming Events</h2>
+          <div class="event-row">
+            <span class="event-date">01</span>
+            <div>
+              <h3>School Programs</h3>
+              <p>Check official school announcements for dates.</p>
+            </div>
+          </div>
+          <div class="event-row">
+            <span class="event-date">02</span>
+            <div>
+              <h3>Academic Activities</h3>
+              <p>Academic schedules and activities.</p>
+            </div>
+          </div>
+          <div class="event-row">
+            <span class="event-date">03</span>
+            <div>
+              <h3>Student Activities</h3>
+              <p>Upcoming student programs.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- NOTIFICATIONS -->
+      <section class="page" id="notifications">
+        <div class="page-heading">
+          <p>KEEP UPDATED</p>
+          <h1>Notifications</h1>
+          <span>Latest update alerts.</span>
+        </div>
+
+        <div class="content-card">
+          <div id="notificationList">
+            <p>No new notifications.</p>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ACADEMIC -->
+      <section class="page" id="academic">
+        <div class="page-heading">
+          <p>STUDENT INFORMATION</p>
+          <h1>Academic Updates</h1>
+          <span>Academic-related updates and reminders.</span>
+        </div>
+
+        <div class="content-card">
+          <h2>Academic Information</h2>
+          <p>Important academic announcements will appear here.</p>
+        </div>
+      </section>
+
+
+      <!-- PROFILE -->
+      <section class="page" id="profile">
+        <div class="page-heading">
+          <p>PERSONAL INFORMATION</p>
+          <h1>Student Profile</h1>
+          <span>Student account information.</span>
+        </div>
+
+        <div class="content-card profile-card">
+          <div class="profile-avatar">🎓</div>
+          <h2 id="profileName">Student</h2>
+          <p>Student Account</p>
+          <div class="profile-info">
+            <p><strong>Username:</strong> <span id="profileUsername"></span></p>
+            <p><strong>Account Type:</strong> Student</p>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- SETTINGS -->
+      <section class="page" id="settings">
+        <div class="page-heading">
+          <p>PERSONALIZE YOUR EXPERIENCE</p>
+          <h1>Settings</h1>
+          <span>Theme and preferences.</span>
+        </div>
+
+        <div class="content-card">
+          <h2>Visual Themes</h2>
+          <p>Choose your preferred appearance.</p>
+
+          <div class="theme-options">
+            <button class="theme-option" data-theme="light">
+              ☀️ <strong>Light Mode</strong>
+              <small>Clean white background with maroon accents.</small>
+            </button>
+
+            <button class="theme-option dark-option" data-theme="dark">
+              🌙 <strong>Dark Mode</strong>
+              <small>Dark charcoal background with red accents.</small>
+            </button>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ADMIN -->
+      <section class="page" id="admin">
+        <div class="page-heading">
+          <p>ADMINISTRATION</p>
+          <h1>Admin Mode</h1>
+          <span>Manage and publish announcements.</span>
+        </div>
+
+        <div class="content-card">
+          <h2>Publish Announcement</h2>
+          <p class="admin-note">
+            Demo interface. Administrator access must be secured
+            through a backend before real school use.
+          </p>
+
+          <form id="announcementForm" class="admin-form">
+            <label for="adminTitle">Announcement Title</label>
+            <input id="adminTitle" type="text"
+                   placeholder="Enter announcement title" required>
+
+            <label for="adminCategory">Category</label>
+            <select id="adminCategory">
+              <option>Important</option>
+              <option>Academic</option>
+              <option>Activities</option>
+            </select>
+
+            <label for="adminDescription">Announcement Details</label>
+            <textarea id="adminDescription"
+                      placeholder="Write the announcement..."
+                      required></textarea>
+
+            <button class="primary-button" type="submit">
+              Publish Announcement
+            </button>
+          </form>
+
+          <h2 class="published-title">Published Updates</h2>
+          <div id="adminPublished"></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+
+  <footer class="footer">
+    CAMPUS CONNECT © 2026 | STUDENT INFORMATION PORTAL
+  </footer>
+
+</div>
+
+
+<script>
+// DEMO LOGIN
+const demoUsername = "student";
+const demoPassword = "campus123";
+const demoAdminUsername = "admin";
+const demoAdminPassword = "admin123";
+
+let currentUser = "";
+let currentRole = "Student";
+
+const defaultAnnouncements = [
+  {
+    title: "School General Assembly",
+    category: "Important",
+    description: "All students are advised to attend the scheduled general assembly.",
+    date: "November 10, 2026"
+  },
+  {
+    title: "Examination Schedule",
+    category: "Academic",
+    description: "Please check the updated examination schedule for your respective grade level.",
+    date: "November 9, 2026"
+  }
+];
+
+let announcements = [...defaultAnnouncements];
+
+const $ = id => document.getElementById(id);
+
+const loginForm = $("loginForm");
+const loginPage = $("loginPage");
+const portal = $("portal");
+const password = $("password");
+
+// PASSWORD VISIBILITY
+$("showPassword").addEventListener("click", () => {
+  password.type = password.type === "password" ? "text" : "password";
+  $("showPassword").textContent =
+    password.type === "password" ? "Show" : "Hide";
+});
+
+// LOGIN
+loginForm.addEventListener("submit", event => {
+  event.preventDefault();
+
+  const username = $("username").value.trim();
+  const pass = password.value;
+
+  if (username === demoUsername && pass === demoPassword) {
+    currentUser = username;
+    currentRole = "Student";
+  } else if (username === demoAdminUsername && pass === demoAdminPassword) {
+    currentUser = username;
+    currentRole = "Administrator";
+  } else {
+    $("loginError").textContent =
+      "Incorrect username or password. Please try again.";
+    return;
+  }
+
+  $("loginError").textContent = "";
+  $("profileName").textContent =
+    currentRole === "Administrator" ? "Administrator" : "Student";
+  $("profileUsername").textContent = currentUser;
+
+  loginPage.classList.add("hidden");
+  portal.classList.remove("hidden");
+
+  document.querySelector('[data-page="admin"]').classList.toggle(
+    "hidden", currentRole !== "Administrator"
+  );
+
+  showPage("dashboard");
+});
+
+// LOGOUT
+$("logoutButton").addEventListener("click", () => {
+  portal.classList.add("hidden");
+  loginPage.classList.remove("hidden");
+  loginForm.reset();
+  $("loginError").textContent = "";
+  password.type = "password";
+  $("showPassword").textContent = "Show";
+  currentUser = "";
+});
+
+// PAGE NAVIGATION
+function showPage(pageName) {
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.toggle("active", page.id === pageName);
+  });
+
+  document.querySelectorAll(".nav-item").forEach(item => {
+    item.classList.toggle("active", item.dataset.page === pageName);
+  });
+
+  $("sidebar").classList.remove("open");
+  window.scrollTo(0, 0);
+}
+
+document.querySelectorAll(".nav-item").forEach(item => {
+  item.addEventListener("click", () => showPage(item.dataset.page));
+});
+
+document.querySelectorAll("[data-goto]").forEach(button => {
+  button.addEventListener("click", () => showPage(button.dataset.goto));
+});
+
+// MOBILE MENU
+$("menuButton").addEventListener("click", () => {
+  $("sidebar").classList.toggle("open");
+});
+
+// ANNOUNCEMENT DISPLAY
+function announcementCard(item) {
+  return `
+    <article class="announcement-card">
+      <span class="tag ${item.category.toLowerCase()}">
+        ${item.category}
+      </span>
+      <h3>${escapeHTML(item.title)}</h3>
+      <p>${escapeHTML(item.description)}</p>
+      <small>Posted: ${escapeHTML(item.date)}</small>
+    </article>`;
+}
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, character => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[character]);
+}
+
+function renderAnnouncements(filter = "") {
+  const filtered = announcements.filter(item =>
+    (item.title + " " + item.description + " " + item.category)
+      .toLowerCase().includes(filter.toLowerCase())
+  );
+
+  const cards = filtered.length
+    ? filtered.map(announcementCard).join("")
+    : "<p>No matching announcements found.</p>";
+
+  $("allAnnouncements").innerHTML = cards;
+  $("dashboardAnnouncements").innerHTML = cards;
+  $("recentUpdates").innerHTML = cards;
+  $("adminPublished").innerHTML = cards;
+}
+
+renderAnnouncements();
+
+// SEARCH
+$("announcementSearch").addEventListener("input", event => {
+  renderAnnouncements(event.target.value);
+});
+
+$("dashboardSearch").addEventListener("input", event => {
+  showPage("announcements");
+  $("announcementSearch").value = event.target.value;
+  renderAnnouncements(event.target.value);
+});
+
+// ADMIN PUBLISHING
+$("announcementForm").addEventListener("submit", event => {
+  event.preventDefault();
+
+  if (currentRole !== "Administrator") return;
+
+  const title = $("adminTitle").value.trim();
+  const category = $("adminCategory").value;
+  const description = $("adminDescription").value.trim();
+t
+  if (!title || !description) return;
+
+  announcements.unshift({
+    title,
+    category,
+    description,
+    date: new Date().toLocaleDateString("en-PH", {
+      year: "numeric",
+      month: "long",
+      day: "numeric"
+    })
+  });
+
+  renderAnnouncements();
+  $("announcementForm").reset();
+
+  alert("Announcement published in this demo session!");
+});
+
+// THEME
+function setTheme(theme) {
+  document.body.classList.toggle("dark-mode", theme === "dark");
+  document.querySelectorAll("[data-theme]").forEach(button => {
+    button.classList.toggle("selected", button.dataset.theme === theme);
+  });
+}
+
+$("themeButton").addEventListener("click", () => {
+  setTheme(document.body.classList.contains("dark-mode") ? "light" : "dark");
+});
+
+document.querySelectorAll("[data-theme]").forEach(button => {
+  button.addEventListener("click", () => setTheme(button.dataset.theme));
+});
+
+// NOTIFICATIONS
+$("notificationButton").addEventListener("click", () => {
+  showPage("notifications");
+});
+
+</script>
+</body>
+</html>
